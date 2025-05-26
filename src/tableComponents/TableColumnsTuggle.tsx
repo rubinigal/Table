@@ -13,7 +13,7 @@ function TableColumnsTuggle({ columnsToggleStatus, setColumnsToggleStatus}: Tabl
 			{ ...flag, isVisible: e.target.checked } : flag
     ));
 	}
-
+ 
 	const resetToggle = () => {
 		setColumnsToggleStatus(prev => prev.map(flag => ({ ...flag, isVisible: true })))
 	}

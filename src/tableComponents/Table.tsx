@@ -19,6 +19,7 @@ function Table({ sortedColumns, columnsToggleStatus, rows, numberOfRows }: Table
   const [visibleRows, setVisibleRows] = useState<Row[]>([...rows.slice(0, numberOfRows)]);
   const [page, setPage] = useState<number>(0);
 
+  // for bigger data sets we want to controll the amount of rows we render
   function changePage(nextPage: number) {
     const startIndex = nextPage * numberOfRows;
     const endIndex = Math.min(startIndex + numberOfRows, rows.length);

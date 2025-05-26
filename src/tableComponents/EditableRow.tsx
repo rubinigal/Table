@@ -16,6 +16,7 @@ function EditableRow({ key, row, sortedColumns, columnsToggleStatus }: EditableR
   const [editValue, setEditValue] = useState<string | number | boolean | string[] | undefined>("");
 
   const buildRow = (row: Row) => {
+    // we first need to transfer row into an array, removing columns that are not visible 
     const rowCells = [];
     for(const column of columnsToggleStatus) {
       const value = row[column.id];
@@ -24,6 +25,7 @@ function EditableRow({ key, row, sortedColumns, columnsToggleStatus }: EditableR
       }
     }
 
+    // the functions editCell and saveEdit are controlling the the states of the cell being changed
     const editCell = (cell: { cellId: string; value: string | boolean | number | string[] | undefined;}) => {
       setEditingCell(cell.cellId);
       setEditValue(cell.value);
@@ -35,6 +37,7 @@ function EditableRow({ key, row, sortedColumns, columnsToggleStatus }: EditableR
       setEditingCell("");
     }
 
+    // changing the cell into an input cell with the proper type
     const editableCell = (cell: { cellId: string; value: string | number | string[] | undefined; }) => {
       const cellType = sortedColumns.find( column => column.id === cell.cellId)?.type;
       
@@ -89,6 +92,7 @@ function EditableRow({ key, row, sortedColumns, columnsToggleStatus }: EditableR
         );
       }
 
+      // defult return if the type is unknown
       return <span onClick={() => editCell(cell)}>{cell.value}</span>
     }
 
