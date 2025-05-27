@@ -45,7 +45,7 @@ function Table({ sortedColumns, columnsToggleStatus, rows, numberOfRows }: Table
         <tbody>
           {visibleRows.map(row =>  
             <EditableRow 
-              key={row.id} 
+              key={row.id}
               row={row} 
               sortedColumns={sortedColumns} 
               columnsToggleStatus={columnsToggleStatus}

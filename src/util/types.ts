@@ -3,6 +3,7 @@ export type Column = {
 	ordinalNo: number;
 	title: string;
 	type: string;
+	selectOptions?: string[];
 	width?: number;
 }
 

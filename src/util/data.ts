@@ -27,11 +27,18 @@ export const columns: Column[] = [
 		ordinalNo: 4,
 		title: "Gender",
 		type: "selection list",
+    selectOptions: ['Male', 'Female', 'Other'],
 		width: 150
-	}
+	},
+  {
+    id: "role",
+		ordinalNo: 5,
+		title: "Role",
+		type: "selection list",
+    selectOptions: ['admin', 'user', 'moderator'],
+		width: 150
+  }
 ]
-
-export const genderOptions = ['Male', 'Female', 'Other'];
 
 export const rows: Row[] = [
   {

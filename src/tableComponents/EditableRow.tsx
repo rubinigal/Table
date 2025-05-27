@@ -1,16 +1,14 @@
 import { useState } from "react";
 import type { ColumnVisibleFlags } from "../App";
 import type { Column, Row } from "../util/types";
-import { genderOptions } from "../util/data";
 
 type EditableRowProps = {
-  key: string;
   row: Row;
   sortedColumns: Column[];
   columnsToggleStatus: ColumnVisibleFlags[];
 }
 
-function EditableRow({ key, row, sortedColumns, columnsToggleStatus }: EditableRowProps) {
+function EditableRow({ row, sortedColumns, columnsToggleStatus }: EditableRowProps) {
   const [rowState, setRowState] = useState<Row>(row);
   const [editingCell, setEditingCell] = useState<string>("");
   const [editValue, setEditValue] = useState<string | number | boolean | string[] | undefined>("");
@@ -39,7 +37,9 @@ function EditableRow({ key, row, sortedColumns, columnsToggleStatus }: EditableR
 
     // changing the cell into an input cell with the proper type
     const editableCell = (cell: { cellId: string; value: string | number | string[] | undefined; }) => {
-      const cellType = sortedColumns.find( column => column.id === cell.cellId)?.type;
+      const cellColumn = sortedColumns.find( column => column.id === cell.cellId);
+      const cellType = cellColumn?.type;
+      const optionArr = cellColumn?.selectOptions;
       
       if(cellType === "string") {
         return (
@@ -83,7 +83,8 @@ function EditableRow({ key, row, sortedColumns, columnsToggleStatus }: EditableR
             autoFocus
             className="w-[98%]"
           >
-            {genderOptions.map((option) => (
+            { 
+              optionArr?.map((option) => (
               <option key={option} value={option}>
                 {option}
               </option>
@@ -103,7 +104,7 @@ function EditableRow({ key, row, sortedColumns, columnsToggleStatus }: EditableR
   }
 
   return (
-    <tr key={key}>
+    <tr>
       {buildRow(rowState)}
     </tr>
   )
